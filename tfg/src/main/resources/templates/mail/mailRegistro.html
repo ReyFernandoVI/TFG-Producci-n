@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <title>Bienvenido</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style>
+        /* Estilos CSS */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .header img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        .content p {
+            line-height: 1.6;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Contenedor principal -->
+    <div class="container">
+        <!-- Encabezado con el logo -->
+        <div class="header">
+            <img src="https://i.imgur.com/iwL8uf6.png" alt="Imagen redimensionada" style="width: 24px; height: 24px;">
+        </div>
+
+        <!-- Contenido del correo -->
+        <div class="content">
+            <p>Querido Socio: <span th:text="${usuario.nombre}"></span></p>
+            <p>Bienvenido a la familia Ibertrade</p>
+            <p>
+                Estamos encantados de verte por primera vez en nuestra casa. Si estás más interesado en obtener descuentos y ventajas,
+                te animamos a que te suscribas a nuestra familia de manera VIP. Por un cómodo y económico precio disfrutarás del auténtico mundo de las Sneakers,
+                como Dios manda... ;D
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>

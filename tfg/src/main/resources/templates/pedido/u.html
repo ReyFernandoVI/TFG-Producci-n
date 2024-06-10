@@ -1,0 +1,22 @@
+<div class="container">
+
+    <h1>Editar Pedido</h1>
+
+    <form action="/pedido/u" method="post">
+
+        <label for="id-numPedido">Nº Pedido</label>
+        <input id="id-numPedido" type="text" name="numPedido" th:value="${pedido.numPedido}" />
+        <br />
+
+        <!--<label for="id-precio">Precio</label>
+        <input id="id-precio" type="number" name="precio" th:value="${zapatilla.precio}" />
+        <br />-->
+
+        
+
+        <input type="hidden" name="idPedido" th:value="${pedido.id}" />
+
+        <input type="submit" />
+    </form>
+    <button onclick="window.location.href='/'">Cancelar</button>
+</div>

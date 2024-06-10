@@ -1,0 +1,51 @@
+<div class="b-example-divider"></div>
+
+<div class="container d-flex justify-content-center align-items-center vh-20">
+    <main class="form-signin bg-body rounded shadow-sm">
+        <form action="/login" method="post">
+            <img class="mb-4" src="/img/logoP.png" alt="" width="100" height="100">
+            <h3 class="mb-3">Introduce tus credenciales</h3>
+
+            <div class="form-floating">
+                <input type="text" class="form-control" id="id-nombre" placeholder="Nombre Usuario" name="nombre">
+                <label for="id-nombre">Nombre Usuario</label>
+            </div>
+            
+            <div class="form-floating">
+                <input type="password" class="form-control" id="id-contraseña" placeholder="Contraseña" name="contraseña">
+                <label for="id-contraseña">Contraseña</label>
+            </div>
+
+            <button class="btn btn-primary w-100 py-2" type="submit">Iniciar sesión</button>
+            <p class="mt-5 mb-3 text-body-secondary" style="width: 40vh;">&copy; 2023–2024</p>
+        </form>
+    </main>
+</div>
+
+<!-- JavaScript para validar el formulario
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.querySelector('form');
+        const nombreInput = document.getElementById('id-nombre');
+        const contraseñaInput = document.getElementById('id-contraseña');
+
+        form.addEventListener('submit', function (event) {
+            if (!validarNombre()) {
+                event.preventDefault();
+                alert('Por favor, introduce un nombre de usuario válido.');
+            } else if (!validarContraseña()) {
+                event.preventDefault();
+                alert('Por favor, introduce una contraseña válida.');
+            }
+        });
+
+        function validarNombre() {
+            // Validar si el nombre de usuario tiene al menos 3 caracteres
+            return nombreInput.value.length >= 3;
+        }
+
+    });
+</script>
+-->
+

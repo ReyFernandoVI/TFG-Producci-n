@@ -1,0 +1,100 @@
+<div class="container">
+    <h1>Lista de Zapatillas</h1>
+    
+    <table class="table table-striped" th:if="${null != carritoZapatillas}">
+        <thead>
+            <tr>
+                <th>Cantidad</th>
+                <th>Nombre</th>
+                <th>Marca</th>
+                <th>Modelo</th>
+                <th>Precio €</th>
+                <th>Color</th>
+                <th>Talla</th>
+                <th>Imagen</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Iterar sobre las zapatillas y mostrar cada una -->
+            <tr th:each="carritoZapatilla : ${carritoZapatillas}">
+                <input type="hidden" th:value="${carritoZapatilla.id}" name="carritoZapatillasId">
+                <input type="hidden" th:value="${carritoZapatilla.carrito?.id}" name="carritoId">
+                <td th:text="${carritoZapatilla.cantidad}"></td>
+                <td th:text="${carritoZapatilla.zapatilla.nombre}"></td>
+                <td th:text="${carritoZapatilla.zapatilla.marcas?.nombre}"></td>
+                <td th:text="${carritoZapatilla.zapatilla.modelo?.nombre}"></td>
+                <td th:text="${carritoZapatilla.zapatilla.precio}"></td>
+                <td th:text="${carritoZapatilla.zapatilla.color}"></td>
+                <td th:text="${carritoZapatilla.zapatilla.talla}"></td>
+                <td>
+                    <form action="zapatilla/r" enctype="multipart/form-data">
+                        <img th:src="@{'/img/' + ${carritoZapatilla.zapatilla.imagen} + '.png'}" width="300"> 
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div th:unless="${null != carritoZapatillas}" class="alert alert-warning">
+        <span>NO HAY NINGUN PRODUCTO EN EL CARRITO</span>
+    </div>
+    <th:block th:if="${null != carritoZapatillas}">
+        <div class="row justify-content-around">
+            <div class="col-3">
+                <button type="button" class="btn btn-success" onclick="finalizarCompra()">
+                    <span>Finalizar compra</span>
+                </button>
+            </div>
+            <div class="col-3">
+                <button type="button" class="btn btn-danger" onclick="cancelarCompra()">
+                    <span>Cancelar compra</span>
+                </button>
+            </div>
+        </div>
+    </th:block>
+    
+    <script>
+        const BASE_URL = window.location.origin;
+        const API_URL = `${BASE_URL}/api/carritos`;
+    
+        function finalizarCompra() {
+            const xhttp = new XMLHttpRequest();
+            xhttp.open('GET', `${API_URL}/finalize`, true)
+            xhttp.send();
+    
+            xhttp.onload = function () {
+                if ([200, 201].includes(xhttp.status)) {
+                    alert("Compra finalizada correctamente");
+                    window.location.href = `${BASE_URL}/catalogue`;
+                } else {
+                    alert("Error al finalizar la compra");
+                }
+            }
+        }
+    
+        function cancelarCompra() {
+            const carritoZapatillasIdElements = document.getElementsByName('carritoZapatillasId');
+            const carritoIdElement = document.getElementsByName('carritoId')[0];
+    
+            const carritoZapatillasId = Array.from(carritoZapatillasIdElements).map(element => element.value);
+            const carritoId = carritoIdElement.value;
+    
+            const params = new URLSearchParams();
+            carritoZapatillasId.forEach(id => params.append('carritoZapatillasId', id));
+            params.append('carritoId', carritoId);
+    
+            const xhttp = new XMLHttpRequest();
+            xhttp.open('GET', `${API_URL}/cancel?${params.toString()}`, true);
+            xhttp.send();
+    
+            xhttp.onload = function () {
+                if ([200, 201].includes(xhttp.status)) {
+                    alert("Compra cancelada");
+                    window.location.href = `${BASE_URL}/catalogue`;
+                } else {
+                    alert(xhttp.error);
+                }
+            }
+        }
+    </script>
+    
+</div>

@@ -1,0 +1,86 @@
+<div class="b-example-divider"></div>
+
+<div class="container d-flex justify-content-center align-items-center vh-20">
+  <main class="form-signin bg-body rounded shadow-sm">
+    <form action="/signup" method="post" id="registro-form">
+      <img class="mb-4" src="/img/logoP.png" alt="" width="100" height="100">
+      <h3 class="mb-3">Registro</h3>
+
+      <div class="mb-3">
+        <input type="text" class="form-control" id="id-nombre" placeholder="Nombre" name="nombre">
+      </div>
+
+      <div class="mb-3">
+        <input type="text" class="form-control" id="id-dni" placeholder="Dni" name="dni">
+      </div>
+
+      <div class="mb-3">
+        <input type="email" class="form-control" id="id-mail" placeholder="Correo electrónico" name="mail">
+      </div>
+
+      <div class="mb-3">
+        <input type="password" class="form-control" id="id-contraseña" placeholder="Contraseña" name="contraseña">
+        <small id="contraseñaHelp" class="form-text text-muted">La contraseña debe tener al menos 8 caracteres, incluyendo al menos una letra mayúscula, una letra minúscula, un número y un carácter especial.</small>
+      </div>
+      <div class="row justify-content-between">
+        <div class="col-5">
+          <button class="w-100 btn btn-lg btn-primary btn-sm" type="submit">Registrarse</button>
+        </div>
+        <div class="col-5">
+          <button class="w-100 btn btn-lg btn-secondary btn-sm" onclick="window.location.href='/'; return false;">Cancelar</button>
+        </div>
+      </div>
+
+      <p class="mt-5 mb-3 text-body-secondary" style="width: 40vh;">&copy; 2017–2024</p>
+    </form>
+  </main>
+</div>
+
+<script>
+  // Función para validar el formulario
+  function validarFormulario(event) {
+    // Evitar que el formulario se envíe automáticamente
+    event.preventDefault();
+
+    // Obtener los valores de los campos
+    var nombre = document.getElementById('id-nombre').value;
+    var dni = document.getElementById('id-dni').value;
+    var mail = document.getElementById('id-mail').value;
+    var contraseña = document.getElementById('id-contraseña').value;
+
+    // Validar que los campos no estén vacíos
+    if (nombre.trim() === '') {
+      alert('Por favor, ingrese su nombre.');
+      return;
+    }
+    if (dni.trim() === '') {
+      alert('Por favor, ingrese su DNI.');
+      return;
+    }
+    if (mail.trim() === '') {
+      alert('Por favor, ingrese su correo electrónico.');
+      return;
+    }
+
+    // Validar estructura de correo electrónico
+    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(mail)) {
+      alert('Por favor, ingrese un correo electrónico válido.');
+      return;
+    }
+
+    // Validar requisitos mínimos de contraseña
+    var contraseñaRegex =/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}/;
+    if (!contraseñaRegex.test(contraseña)) {
+      alert('La contraseña debe tener al menos 8 caracteres, incluyendo al menos una letra mayúscula, una letra minúscula, un número y un carácter especial.');
+      return;
+    }
+
+    // Si todos los campos están llenos y las validaciones pasaron, enviar el formulario
+    document.getElementById('registro-form').submit();
+  }
+
+  // Agregar el evento de escucha al formulario
+  document.getElementById('registro-form').addEventListener('submit', validarFormulario);
+</script>
+

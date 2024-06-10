@@ -1,0 +1,26 @@
+<div class="container">
+    <h1>Nueva Marca</h1>
+
+    <form id="form-nueva-marca" action="/marca/c" method="post">
+        <div>
+            <label for="id-nombre">Nombre:</label>
+            <input id="id-nombre" type="text" name="nombre" required />
+        </div>
+       
+        <div>
+            <button type="submit">Guardar</button>
+            <button type="button" onclick="window.location.href='/'">Cancelar</button>
+        </div>
+    </form>
+
+    <script>
+        // Escuchar el evento de cambio en el select de modelos
+        document.getElementById('id-modelo').addEventListener('change', function() {
+            var selectedOption = this.options[this.selectedIndex];
+            var modelName = selectedOption.getAttribute('data-nombre'); // Obtener el nombre del modelo
+
+            // Actualizar el valor del campo Nombre con el nombre del modelo seleccionado
+            document.getElementById('id-nombre').value = modelName;
+        });
+    </script>
+</div>

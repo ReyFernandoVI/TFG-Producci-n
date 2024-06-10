@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Spring eCommerce</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/css/heroic-features.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <div>
+        <!-- Include your header content here -->
+    </div>
+
+    <!-- Page Content -->
+    <div class="container">
+        <!-- Page Heading/Breadcrumbs -->
+        <h1 class="mt-4 mb-3">
+            Spring eCommerce <small>Producto</small>
+        </h1>
+
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/catalogue">Catalogo</a></li>
+            <li class="breadcrumb-item active">Producto</li>
+        </ol>
+
+        <!-- Blog Post -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <a href="#">
+                            <img class="img-fluid rounded" th:src="@{'/img/' + ${zapatilla.imagen} + '.png'}"
+                                alt="Imagen de Zapatilla">
+                        </a>
+                    </div>
+                    <div class="col-lg-6">
+                        <form action="/pay" method="post">
+                            <input type="hidden" th:value="${zapatilla.id}" name="idZapatilla">
+
+                            <h2 class="card-title" th:text="${zapatilla.nombre}">Nombre: </h2>
+
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <h5>Marca: <span th:text="${zapatilla.marcas?.nombre}">Marca</span></h5>
+                                </li>
+                                <li class="list-group-item">
+                                    <h5>Modelo: <span th:text="${zapatilla.modelo?.nombre}">Modelo</span></h5>
+                                </li>
+                                <li class="list-group-item">
+                                    <h5>Talla: <span th:text="${zapatilla.talla}">Talla</span></h5>
+                                </li>
+                                <li class="list-group-item">
+                                    <h5>Color: <span th:text="${zapatilla.color}">Color</span></h5>
+                                </li>
+                                <li class="list-group-item">
+                                    <h5>Stock: <span th:text="${zapatilla.stock}">Stock</span></h5>
+                                </li>
+                                <li class="list-group-item">
+                                    <h5>Precio: $<span th:text="${zapatilla.precio}">0.00</span></h5>
+                                </li>
+                                <!--<li class="list-group-item">
+                                    <p>Descripción del Producto</p>
+                                </li>-->
+                                <li class="list-group-item">
+                                    <h6>
+                                        Cantidad: <input type="number" id="cantidad" name="cantidad" autocomplete="off"
+                                            min="1" th:max="${zapatilla.stock}" value="1">
+                                    </h6>
+                                </li>
+                            </ul>
+                            <br>
+                            <button type="button" class="btn btn-success"
+                                th:onclick="addZapatilla([[(${zapatilla})]])">Añadir al Carrito</button>
+                            <a href="/catalogue" type="button" class="btn btn-danger">Volver</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+
+    <!-- Footer -->
+    <div>
+        <!-- Include your footer content here -->
+    </div>
+    <script>
+
+        const BASE_URL = window.location.origin;
+        const API_URL = `${BASE_URL}/api/carritos`;
+
+        function addZapatilla(zapatilla) {
+            if (!zapatilla) {
+                return;
+            }
+            const cantidadProducto = document.getElementById("cantidad").value;
+            const xhttp = new XMLHttpRequest();
+            xhttp.open('POST', `${API_URL}/update`, true)
+            xhttp.setRequestHeader('Content-type', 'application/json; charset=UTF-8')
+            const data = {
+                zapatilla,
+                cantidad: null !== cantidadProducto && undefined !== cantidadProducto? cantidadProducto: 1
+            };
+            xhttp.send(JSON.stringify(data));
+
+            xhttp.onload = function () {
+
+                if ([200, 201].includes(xhttp.status)) {
+                    alert("Guardado correctamente");
+                    window.location.href = `${BASE_URL}/catalogue`;
+                } else {
+                    alert("Error al proseguir con la compra");
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

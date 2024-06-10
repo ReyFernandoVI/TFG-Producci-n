@@ -1,0 +1,16 @@
+<div class="container">
+
+    <h1>Editar Marca</h1>
+
+    <form action="/marca/u" method="post">
+
+        <label for="id-nombre">Nombre</label>
+        <input id="id-nombre" type="text" name="nombre" th:value="${marca.nombre}" />
+        <br />
+
+        <input type="hidden" name="idMarca" th:value="${marca.id}" />
+
+        <input type="submit" />
+    </form>
+    <button onclick="window.location.href='/'">Cancelar</button>
+</div>

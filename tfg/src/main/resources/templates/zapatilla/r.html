@@ -1,0 +1,78 @@
+<div class="container">
+    <!-- Botón para añadir zapatilla -->
+    <button class="btn btn-outline-primary" onclick="window.location.href='/zapatilla/c'">Añadir Zapatilla</button>
+    
+        <button class="btn btn-outline-primary" style="margin-left: 430px;" onclick="window.location.href='/usuario/r'">Usuarios</button>
+        <button class="btn btn-outline-primary" onclick="window.location.href='/marca/r'">Marcas</button>
+        <button class="btn btn-outline-primary" onclick="window.location.href='/pedido/r'">Pedidos</button>
+        <button class="btn btn-outline-primary" onclick="window.location.href='/modelo/r'">Modelos</button>
+    <!-- Formulario de filtrado -->
+    <form class="form-inline" th:action="@{/zapatilla/r}" method="get">
+        <div class="form-group mb-2">
+            <label for="palabraClave">Filtrar:</label>
+        </div>
+        <div class="form-group mx-sm-3 mb-2">
+            <input type="text" name="palabraClave" class="form-control" id="palabraClave" th:value="${palabraClave}" placeholder="Introduce término de búsqueda" required> 
+        </div>
+        <input type="submit" class="btn btn.-info mb-2" value="buscar">
+        <input type="reset" class="btn btn.-secoundary mb-2" value="Borrar">
+
+    </form>
+    <br>
+    <!-- Encabezado de la lista -->
+    <h1>Lista de Zapatillas</h1>
+    
+    <!-- Tabla para mostrar las zapatillas -->
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Marca</th>
+                <th>Modelo</th>
+                <th>Precio €</th>
+                <th>Color</th>
+                <th>Talla</th>
+                <th>Stock</th>
+                <th>Imagen</th>
+                <th>Editar</th>
+                <th>Borrar</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Iterar sobre las zapatillas y mostrar cada una -->
+            <tr th:each="zapatilla : ${zapatillas}">
+                <td th:text="${zapatilla.nombre}"></td>
+                <td th:text="${zapatilla.marcas?.nombre}"></td>
+                <td th:text="${zapatilla.modelo?.nombre}"></td>
+                <td th:text="${zapatilla.precio}"></td>
+                <td th:text="${zapatilla.color}"></td>
+                <td th:text="${zapatilla.talla}"></td>
+                <td th:text="${zapatilla.stock}"></td>
+                <td>
+                    <form action="zapatilla/r" enctype="multipart/form-data">
+                        <img th:src="@{'/img/' + ${zapatilla.imagen} + '.png'}" width="300"> 
+                    </form>
+                </td>
+                <td>
+                    <!-- Botón para editar zapatilla -->
+                    <a th:href="@{/zapatilla/u(id=${zapatilla.id})}" class="btn btn-outline-warning" role="button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                            <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z"/>
+                        </svg>
+                    </a>
+                </td>
+                <td>
+                    <!-- Formulario para borrar zapatilla -->
+                    <form action="/zapatilla/d" method="post">
+                        <input type="hidden" name="id" th:value="${zapatilla.id}">
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro de querer borrar esta zapatilla?');">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                                <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"/>
+                            </svg>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

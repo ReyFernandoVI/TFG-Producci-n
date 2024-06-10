@@ -1,0 +1,56 @@
+<div class="container">
+
+    <h1>Editar Zapatilla</h1>
+
+    <form action="/zapatilla/u" method="post" enctype="multipart/form-data">
+
+        <label for="id-nombre">Nombre</label>
+        <input id="id-nombre" type="text" name="nombre" th:value="${zapatilla.nombre}" />
+        <br />
+
+        <label for="id-marcas">Seleccion una marca:</label>
+            <select id="id-marcas" name="idMarca" required>
+                <option 
+                th:each="marca:${marcas}"
+                th:text="${marca.nombre}"
+                th:value="${marca.id}"
+                ></option>
+            </select>
+        </br>
+
+        <label for="id-modelo">Selecciona una modelo:</label>
+            <select id="id-modelo" name="idModelo" required>
+                <option 
+                th:each="modelo:${modelos}"
+                th:text="${modelo.nombre}"
+                th:value="${modelo.id}"
+                ></option>
+            </select>
+        </br>
+
+        <label for="id-precio">Precio</label>
+        <input id="id-precio" type="text" name="precio" th:value="${zapatilla.precio}" />
+        <br />
+
+        <label for="id-color">Color</label>
+        <input id="id-color" type="text" name="color" th:value="${zapatilla.color}" />
+        <br />
+
+        <label for="id-talla">Talla</label>
+        <input id="id-talla" type="text" name="talla" th:value="${zapatilla.talla}" />
+        <br />
+
+        <label for="id-stock">Stock</label>
+        <input id="id-stock" type="text" name="stock" th:value="${zapatilla.stock}" />
+        <br />
+
+        <label for="id-imagen">Imagen</label>
+        <input id="id-imagen" type="file" name="imagenZapatilla" accept=".jpg,.jpeg,.png" />
+        <br />
+
+        <input type="hidden" name="idZapatilla" th:value="${zapatilla.id}" />
+
+        <input type="submit" />
+    </form>
+    <button onclick="window.location.href='/'">Cancelar</button>
+</div>

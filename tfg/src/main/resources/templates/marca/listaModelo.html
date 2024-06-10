@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Modelos</title>
+</head>
+<body>
+   
+    <h1>Marca del Modelo: <span th:text="${marca.nombre}"></span></h1>
+    
+    <!-- Verificar si la marca y sus modelos no son nulos -->
+    <table th:if="${marca != null and marca.modelos != null}">
+   
+            <tr>
+                <td>Nombre del Modelo:</td>
+            </tr>
+            <!-- Iterar sobre cada modelo de la marca -->
+            <tr th:each="modelo : ${marca.modelos}">
+                <td th:text="${modelo.nombre}"></td>
+            </tr>
+    </table>
+    
+    
+</body>
+</html>

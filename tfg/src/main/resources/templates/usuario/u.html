@@ -1,0 +1,24 @@
+<div class="container">
+  
+    <h1>Editar usuario</h1>
+
+    <form action="/usuario/u" method="post">
+
+        <label for="id-nombre">Nombre</label>
+        <input id="id-nombre" type="text" name="nombre" autofocus="autofocus" th:value="${usuario.nombre}" />
+        <br/>
+
+        <label for="id-dni">Dni</label>
+        <input id="id-dni" type="text" name="dni" autofocus="autofocus" th:value="${usuario.dni}" />
+        <br/>
+
+        <label for="id-mail">Correo electrónico</label> <!-- Agregado -->
+        <input id="id-mail" type="email" name="mail" th:value="${usuario.mail}" /> <!-- Agregado -->
+        <br/>
+
+        <input type="hidden" name="id" th:value="${usuario.id}"/>
+
+        <input type="submit"/>
+    </form>
+    <button onclick="window.location.href='/'">Cancelar</button>
+</div>
