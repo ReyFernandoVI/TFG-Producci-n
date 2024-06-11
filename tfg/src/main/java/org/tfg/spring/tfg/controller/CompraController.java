@@ -37,14 +37,14 @@ public class CompraController {
         @RequestParam("idZapatilla") Long idZapatilla,
         @RequestParam("cantidad") int cantidad,
         ModelMap m) {
-// Aquí puedes obtener los detalles de la zapatilla desde tu base de datos usando el idZapatilla
+        // Aquí puedes obtener los detalles de la zapatilla desde tu base de datos usando el idZapatilla
         Zapatilla zapatilla = zapatillaService.findById(idZapatilla);
         System.out.println(zapatilla.getNombre());
-// Agregar los detalles de la zapatilla y la cantidad al modelo
+        // Agregar los detalles de la zapatilla y la cantidad al modelo
         m.put("zapatilla", zapatilla);
         m.put("cantidad", cantidad);
 
-// Calcular el total
+        // Calcular el total
         double total = zapatilla.getPrecio() * cantidad;
         m.put("total", total);
         m.put("view", "home/pay");

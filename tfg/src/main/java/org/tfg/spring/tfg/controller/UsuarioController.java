@@ -46,7 +46,7 @@ public class UsuarioController {
             try {
                 PRG.error("El usuario " + nombre + " ya existe", "/usuario/c");
             } catch (DangerException e1) {
-                // TODO Auto-generated catch block
+                
                 e1.printStackTrace();
             }
         }
@@ -71,7 +71,7 @@ public class UsuarioController {
             try {
                 PRG.error("El usuario no pudo ser actualizado", "/usuario/r");
             } catch (DangerException e1) {
-                // TODO Auto-generated catch block
+                
                 e1.printStackTrace();
             }
         }
@@ -86,7 +86,7 @@ public class UsuarioController {
             try {
                 PRG.error("No se puede borrar el usuario", "/usuario/r");
             } catch (DangerException e1) {
-                // TODO Auto-generated catch block
+                
                 e1.printStackTrace();
             }
         }

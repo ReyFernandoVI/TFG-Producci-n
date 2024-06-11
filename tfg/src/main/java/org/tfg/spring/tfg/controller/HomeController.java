@@ -161,7 +161,7 @@ public class HomeController {
             try {
                 PRG.error("El usuario " + nombre + " ya existe", "/usuario/c");
             } catch (DangerException e1) {
-                // TODO Auto-generated catch block
+                
                 e1.printStackTrace();
             }
         }

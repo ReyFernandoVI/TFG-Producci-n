@@ -64,4 +64,9 @@ public class MailService {
         sendEmailFromTemplate(usuario, "mail/mailRegistro", "IBERTRADE: Bienvenido a la familia");
     }
 
+    @Async
+    public void sendSaleConfirmEmail(Usuario usuario) {
+        sendEmailFromTemplate(usuario, "mail/mailCompra", "IBERTRADE: Detalles de la Compra");
+    }
+
 }

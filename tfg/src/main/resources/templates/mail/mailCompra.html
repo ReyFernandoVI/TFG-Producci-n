@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Detalles de la Compra</title>
+</head>
+<body>
+    <div class="header">
+        <img src="https://i.imgur.com/iwL8uf6.png" alt="Imagen redimensionada" style="width: 70px; height: 70px;">
+    </div>
+    <h1>¡Gracias por tu compra, <span th:text="${usuario.nombre}">Usuario</span>!</h1>
+    <p>Detalles de tu compra:</p>
+    <!-- Añade los detalles de la compra aquí -->
+     
+    <table>
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="carritoZapatilla : ${carritoZapatillas}">
+                <input type="hidden" th:value="${carritoZapatilla.id}" name="carritoZapatillasId">
+                <input type="hidden" th:value="${carritoZapatilla.carrito?.id}" name="carritoId">
+                <td th:text="${carritoZapatilla.zapatilla.nombre}">Nombre del producto</td>
+                <td th:text="${carritoZapatilla.cantidad}">Cantidad</td>
+                <td th:text="${carritoZapatilla.zapatilla.precio}">Precio</td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>
